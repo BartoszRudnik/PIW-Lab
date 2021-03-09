@@ -13,6 +13,13 @@
     letter-spacing: 4px;
     font-weight: bold;
   }
+
+  .box h2{
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+
   .box h5{
     font-size: 20px;
     letter-spacing: 3px;
@@ -22,6 +29,18 @@
     text-align: justify;
   }  
   
+  .icon{
+    padding: 20px;    
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .icon p{
+    font-weight: bold;
+    text-align: center;
+  }
+  
   div.blueTable {
     border: 1px solid #1C6EA4;
     background-color: #C9D1D5;
@@ -30,16 +49,15 @@
     border-collapse: collapse;
     border: 2px solid #AAAAAA;
     padding: 3px 2px;
-    font-size: 13px;
-    color: #3F3F3A;
-    font-size: 14px;
+    font-size: 23px;
+    color: #3F3F3A;    
     display: table;
   }
 
   .divTableCell{
     border: 2px solid #AAAAAA;
     padding: 3px 2px;
-    font-size: 13px;
+    font-size: 18px;
     color: #3F3F3A;
     display: table-cell;
   }
@@ -47,7 +65,7 @@
   .divTableHead {
     border: 2px solid #AAAAAA;
     padding: 3px 2px;
-    font-size: 15px;
+    font-size: 23px;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center;
@@ -86,4 +104,3 @@
 
 .divTableRow { display: table-row; }
 
-  
