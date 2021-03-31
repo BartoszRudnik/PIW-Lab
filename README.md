@@ -1,1 +1,1 @@
-# PIW-Lab
+# Programowanie interfejsów webowych - lab
