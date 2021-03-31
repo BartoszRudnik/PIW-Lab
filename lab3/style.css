@@ -36,10 +36,68 @@ form button{
     transition: all 0.5s ease;
 }
 
+form button:disabled{
+    
+    color: grey;    
+}
+
+form button[disabled]:hover{
+    background: white;
+    color: grey;
+}
+
 form button:hover{
     background: #d45d31;
     color: white;
 }
+
+.delete-modal{   
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    position: absolute;
+    top: 40vh;
+    right: 30vw;
+    background: #FAFAD2;    
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 35%;
+    height: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);  
+ }
+
+ .modal-header {
+    background: #FAFAD2;
+    padding: 2px 16px;   
+    color: black;
+    font-weight: bold;
+}
+
+ .cancel-delete {
+    background: greenyellow;
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+ }
+
+ .accept-delete {
+    background: red;
+    color: black;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+ }
 
 .todo-container{
     display: flex;
@@ -53,8 +111,8 @@ form button:hover{
     border: none;
 }
 
-.todo{
-    margin: 0.5rem;
+.todo{    
+    margin: 0.5rem;   
     background: white;
     color: black;
     font-size: 1.5rem;
@@ -65,11 +123,12 @@ form button:hover{
     cursor: pointer;
 }
 
-.todo li{
-    flex: 1;
+.todo li{    
+    flex: 1;  
+    margin: 0.5rem;  
 }
 
-.delete-btn, .complete-btn{
+.delete-btn, .complete-btn, .date-label{
     background: #CD5C5C;
     color: white;
     border: none;
@@ -78,22 +137,25 @@ form button:hover{
     font-size: 1rem;
 }
 
+.date-label{
+    background: #2F4F4F;
+}
+
 .complete-btn{
     background: #228B22;
 }
 
-.todo-item{
-    padding: 0rem 0.5rem;
-}
-
-.fa-trash, .fa-check{
+.fa-trash, .fa-check, .fa-trash-restore{
     pointer-events: none;
 }
 
 .completed{
-    text-decoration: line-through;
     background: grey;
-    opacity: 0.8;
+}
+
+.completed li{
+    text-decoration: line-through;    
+    opacity: 0.7;
 }
 
 .fall{

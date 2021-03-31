@@ -1,17 +1,17 @@
-//selectors
 const toDoInput = document.querySelector('.todo-input');
 const toDoButton = document.querySelector('.todo-button');
 const toDoList = document.querySelector('.todo-list');
+const filterOption = document.querySelector('.filter-todo');
 
-//event listeners
+let trashClone;
+
 toDoButton.addEventListener('click', addToDoItem);
 toDoList.addEventListener('click', deleteCheck);
+filterOption.addEventListener('click', filterToDo);
 
-
-//functions
-function addToDoItem(event){
+function addToDoItem(event) {
     event.preventDefault();
-    
+
     const toDoDiv = document.createElement("div");
     toDoDiv.classList.add("todo");
 
@@ -28,47 +28,131 @@ function addToDoItem(event){
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.classList.add("delete-btn");
-    
+
     toDoDiv.appendChild(doneButton);
     toDoDiv.appendChild(deleteButton);
 
-    if(toDoInput.value != ""){
+    if (toDoInput.value != "") {
         toDoList.appendChild(toDoDiv);
         toDoInput.value = "";
     }
 
 }
 
-function deleteCheck(event){
+$(document).ready(function() {
+    $("#btnRestore").click(function(){        
+        $('.todo-list').append(trashClone);
+    }); 
+});
+
+function deleteCheck(event) {
 
     const item = event.target;
 
-    if(item.classList[0] === "delete-btn"){
+    if (item.classList[0] === "delete-btn") {
+
+        document.getElementById("btnRestore").disabled = false;
 
         const task = item.parentElement;
+        trashClone = $(task).clone(true);
 
-        task.classList.add("fall");
-        
-        task.addEventListener('transitionend', function(){
-            task.remove();
+        $('body').append(
+            `<div id="deleteModal" class="delete-modal">                
+                <div class="modal-content"> 
+                    <label class="modal-header"> Czy na pewno chcesz usunac? </label>                                   
+                    <button type="button" id="acceptDelete" class="accept-delete">
+                        Usun
+                    </button>
+                    <button type="button" id="cancelDelete" class="cancel-delete">
+                        Anuluj
+                    </button>
+                </div>                
+          </div>`
+        );
+        $('#deleteModal').click((event) => {
+            if ($(event.target).attr('id') === 'acceptDelete') {
+                task.classList.add("fall");
+                task.addEventListener('transitionend', function () {
+                    const listElement = $(item).closest('div');                                     
+                    $(listElement).remove();
+                });
+                $('#deleteModal').remove();
+            } else if ($(event.target).attr('id') === 'cancelDelete') {
+                $('#deleteModal').remove();
+            }
         });
-
     }
 
-    if(item.classList[0] === "complete-btn"){
+    if (item.classList[0] === "complete-btn") {
 
         const task = item.parentElement;
 
         task.classList.toggle("completed");
 
+        showDate(item);
+
     }
 
-    if(item.classList[0] === "todo-item"){
+    if (item.classList[0] === "todo-item") {
 
         const task = item.parentElement;
 
         task.classList.toggle("completed");
 
+        showDate(item);
+
+    }
+
+}
+
+function showDate(item) {
+
+    var date = new Date();
+
+    if (item.parentElement.classList.contains('completed')) {
+
+        const dateLabel = document.createElement("label");
+        var text = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+
+        dateLabel.innerHTML = text;
+        dateLabel.classList.add("date-label");
+
+        item.parentElement.appendChild(dateLabel);
+
+    }
+
+    if (!item.parentElement.classList.contains('completed')) {
+        item.parentElement.removeChild(item.parentElement.lastChild);
+    }
+
+}
+
+function filterToDo(event) {
+
+    const allTasks = toDoList.childNodes;
+
+    for (var i = 0; i < allTasks.length; i += 1) {
+        switch (event.target.value) {
+            case "all":
+                allTasks[i].style.display = "flex";
+                break;
+            case "completed":
+                if (allTasks[i].classList.contains("completed")) {
+                    allTasks[i].style.display = "flex";
+                }
+                else {
+                    allTasks[i].style.display = "none";
+                }
+                break;
+            case "uncompleted":
+                if (!allTasks[i].classList.contains("completed")) {
+                    allTasks[i].style.display = "flex";
+                }
+                else {
+                    allTasks[i].style.display = "none";
+                }
+                break;
+        }
     }
 
 }
