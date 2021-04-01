@@ -1,12 +1,18 @@
 const toDoInput = document.querySelector('.todo-input');
 const toDoButton = document.querySelector('.todo-button');
-const toDoList = document.querySelector('.todo-list');
-const filterOption = document.querySelector('.filter-todo');
+const toDoListBardzo = document.querySelector('#bardzo');
+const toDoListSrednio = document.querySelector('#srednio');
+const toDoListMalo = document.querySelector('#malo');
+const filterOption = document.querySelector('#filter');
+const importanceOption = document.querySelector('#importanceSelect');
 
 let trashClone;
+let trashIdList;
 
 toDoButton.addEventListener('click', addToDoItem);
-toDoList.addEventListener('click', deleteCheck);
+toDoListBardzo.addEventListener('click', deleteCheck);
+toDoListMalo.addEventListener('click', deleteCheck);
+toDoListSrednio.addEventListener('click', deleteCheck);
 filterOption.addEventListener('click', filterToDo);
 
 function addToDoItem(event) {
@@ -32,17 +38,28 @@ function addToDoItem(event) {
     toDoDiv.appendChild(doneButton);
     toDoDiv.appendChild(deleteButton);
 
+    const importance = importanceOption.options[importanceOption.selectedIndex].text;
+
     if (toDoInput.value != "") {
-        toDoList.appendChild(toDoDiv);
+        if (importance === "Bardzo pilne") {
+            toDoListBardzo.appendChild(toDoDiv);
+        }
+        if (importance === "Srednio pilne") {
+            toDoListSrednio.appendChild(toDoDiv);
+        }
+        if (importance === "Malo pilne") {
+            toDoListMalo.appendChild(toDoDiv);
+        }
         toDoInput.value = "";
     }
 
 }
 
-$(document).ready(function() {
-    $("#btnRestore").click(function(){        
-        $('.todo-list').append(trashClone);
-    }); 
+$(document).ready(function () {
+    $("#btnRestore").click(function () {
+        $('#' + trashIdList).append(trashClone);
+        $("#btnRestore").disabled = true;
+    });
 });
 
 function deleteCheck(event) {
@@ -51,10 +68,7 @@ function deleteCheck(event) {
 
     if (item.classList[0] === "delete-btn") {
 
-        document.getElementById("btnRestore").disabled = false;
-
         const task = item.parentElement;
-        trashClone = $(task).clone(true);
 
         $('body').append(
             `<div id="deleteModal" class="delete-modal">                
@@ -71,9 +85,12 @@ function deleteCheck(event) {
         );
         $('#deleteModal').click((event) => {
             if ($(event.target).attr('id') === 'acceptDelete') {
+                document.getElementById("btnRestore").disabled = false;
+                trashIdList = task.parentElement.id;
+                trashClone = $(task).clone(true);
                 task.classList.add("fall");
                 task.addEventListener('transitionend', function () {
-                    const listElement = $(item).closest('div');                                     
+                    const listElement = $(item).closest('div');
                     $(listElement).remove();
                 });
                 $('#deleteModal').remove();
@@ -129,8 +146,17 @@ function showDate(item) {
 
 function filterToDo(event) {
 
-    const allTasks = toDoList.childNodes;
+    const bardzoTasks = document.querySelectorAll('#bardzo div');
+    const srednioTasks = document.querySelectorAll('#srednio div');
+    const maloTasks = document.querySelectorAll('#malo div');
 
+    filter(bardzoTasks, event);
+    filter(srednioTasks, event);
+    filter(maloTasks, event);
+
+}
+
+function filter(allTasks, event) {
     for (var i = 0; i < allTasks.length; i += 1) {
         switch (event.target.value) {
             case "all":
@@ -154,5 +180,72 @@ function filterToDo(event) {
                 break;
         }
     }
+}
+
+function hideMalo() {
+    hide("malo");
+}
+
+function hideSrednio() {
+    hide("srednio");
+}
+
+function hideBardzo() {
+    hide("bardzo");
+}
+
+function hide(importance) {
+    var x = document.querySelectorAll("#" + importance + " div");
+    x.forEach((element) => {
+        if (element.style.display === "none") {
+            element.style.display = "flex";
+        } else {
+            element.style.display = "none";
+        }
+    });
+}
+
+function search() {
+
+    var input, filter, myCheckbox;
+
+    input = document.getElementById('myInput');
+    myCheckbox = document.getElementById('myCheck');
+
+    if (myCheckbox.checked) {
+        filter = input.value.toUpperCase();
+    }else{
+        filter = input.value;
+    }
+
+    bardzoList = document.querySelectorAll("#bardzo div");
+    srednioList = document.querySelectorAll("#srednio div");
+    maloList = document.querySelectorAll("#malo div");
+
+    searchList(bardzoList, filter, myCheckbox);
+    searchList(srednioList, filter, myCheckbox);
+    searchList(maloList, filter, myCheckbox);
+
+}
+
+function searchList(list, filter, checkbox) {
+
+    list.forEach((element) => {
+
+        li = element.getElementsByTagName('li');
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            txtValue = a.innerText || a.textContent;
+            if(checkbox.checked){
+                txtValue = txtValue.toUpperCase();
+            }
+            if (txtValue.indexOf(filter) > -1) {
+                li[i].parentElement.style.display = "flex";
+            } else {
+                li[i].parentElement.style.display = "none";
+            }
+        }
+    });
 
 }

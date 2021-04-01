@@ -30,10 +30,18 @@
         </button>
 
         <div class="select">
-            <select name="todos" class="filter-todo">
-                <option value="all">All</option>
-                <option value="completed">Completed</option>
-                <option value="uncompleted">Uncompleted</option>
+            <select name="todos" class="filter-todo" id="importanceSelect">
+                <option value="srednio-pilne">Srednio pilne</option>
+                <option value="malo-pilne">Malo pilne</option>
+                <option value="bardzo-pilne">Bardzo pilne</option>
+            </select>
+        </div>
+
+        <div class="select">
+            <select name="todos" class="filter-todo" id="filter">
+                <option value="all">Wszystkie</option>
+                <option value="completed">Skonczone</option>
+                <option value="uncompleted">Nieskonczone</option>
             </select>
         </div>
 
@@ -42,11 +50,30 @@
                 <i class="fas fa-trash-restore"></i>
             </button>
         </div>
+        
+        <div><input class="search-tasks" type="text" id="myInput" onkeyup="search()" placeholder="Szukaj zadan"></div>
 
-    </form>
+        <div>
+            <input type="checkbox" id="myCheck">
+            <label for="myCheck">Case-insensitive</label>
+          </div>
 
-    <div class="todo-container">
-        <ul class="todo-list"></ul>
+    </form>    
+
+    <div class="wraper">
+
+        <div class="todo-container">
+            <ul class="todo-list" id="malo"><button class="list-title" id="button-malo" onclick="hideMalo()">Malo pilne</button></ul>
+        </div>
+
+        <div class="todo-container">
+            <ul class="todo-list" id="srednio"><button class="list-title" id="button-srednio" onclick="hideSrednio()"">Srednio pilne</button></ul>
+        </div>
+
+        <div class="todo-container">
+            <ul class="todo-list" id="bardzo"><button class="list-title" id="button-pilne" onclick="hideBardzo()"">Bardzo pilne</button></ul>
+        </div>
+
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
