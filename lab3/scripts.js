@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const toDoInput = document.querySelector('.todo-input');
 const toDoButton = document.querySelector('.todo-button');
@@ -18,6 +18,7 @@ toDoListSrednio.addEventListener('click', deleteCheck);
 filterOption.addEventListener('click', filterToDo);
 
 function addToDoItem(event) {
+
     event.preventDefault();
 
     const toDoDiv = document.createElement("div");
@@ -159,6 +160,7 @@ function filterToDo(event) {
 }
 
 function filter(allTasks, event) {
+
     for (var i = 0; i < allTasks.length; i += 1) {
         switch (event.target.value) {
             case "all":
@@ -182,6 +184,7 @@ function filter(allTasks, event) {
                 break;
         }
     }
+
 }
 
 function hideMalo() {
@@ -197,7 +200,9 @@ function hideBardzo() {
 }
 
 function hide(importance) {
+
     var x = document.querySelectorAll("#" + importance + " div");
+
     x.forEach((element) => {
         if (element.style.display === "none") {
             element.style.display = "flex";
@@ -205,6 +210,7 @@ function hide(importance) {
             element.style.display = "none";
         }
     });
+
 }
 
 function search() {
@@ -220,9 +226,9 @@ function search() {
         filter = input.value;
     }
 
-    bardzoList = document.querySelectorAll("#bardzo div");
-    srednioList = document.querySelectorAll("#srednio div");
-    maloList = document.querySelectorAll("#malo div");
+    var bardzoList = document.querySelectorAll("#bardzo div");
+    var srednioList = document.querySelectorAll("#srednio div");
+    var maloList = document.querySelectorAll("#malo div");
 
     searchList(bardzoList, filter, myCheckbox);
     searchList(srednioList, filter, myCheckbox);
@@ -234,9 +240,10 @@ function searchList(list, filter, checkbox) {
 
     list.forEach((element) => {
 
-        li = element.getElementsByTagName('li');
+        var a, txtValue;
+        var li = element.getElementsByTagName('li');
 
-        for (i = 0; i < li.length; i++) {
+        for (var i = 0; i < li.length; i++) {
             a = li[i];
             txtValue = a.innerText || a.textContent;
             if(checkbox.checked){
