@@ -1,37 +1,65 @@
 import React, { Component } from 'react'
 
 export default class SearchFilter extends Component {
-    constructor(){
-        super();
-        this.state = {
-            searchTag: 'Wyszukuj po tagach',
-            searchDescription: 'Wyszukuj po opisach'
-        }
+  constructor() {
+    super();
+    this.state = {
+      searchTag: 'Wyszukuj po tagach',
+      searchDescription: 'Wyszukuj po opisach',
+      tags: []
     }
+  }
 
-    updateByDescription = (event) => {
-      const val = event.target.value;
+  filter = (e) => {   
+    this.props.filter(this.descriptionInput.value, this.state.tags)
+  } 
 
-      this.props.updateByDescription(val)
+  addTag = (e) => {
+    const val = e.target.value;
+    if (e.key === 'Enter' && val) {
+      if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
+        return;
+      }
+      this.setState({ tags: [...this.state.tags, val] });
+      this.tagInput.value = null;      
     }
+    else if (e.key === 'Backspace' && !val) {
+      this.removeTag(this.state.tags.length - 1);      
+    }    
+  }
 
-    updateByTags = (event) => {
-      const val = event.target.value;
+  removeTag = (i) => {
+    const newTags = [...this.state.tags];
+    newTags.splice(i, 1);
+    this.setState({ tags: newTags });
+  }
 
-      this.props.updateByTags(val)
-    }
+  render() {
+    return (
+      <div>
+        <input type="text"
+          placeholder='Wyszukuj po opisach'
+          onChange={this.filter}
+          ref={d => { this.descriptionInput = d; }} />
+        <div className="input-tag">
+          <ul className="input-tag__tags">
 
-    render() {
-        return (
-          <div>
-              <input type="text"
-                placeholder='Wyszukuj po opisach'                
-                onChange={this.updateByDescription}/>
-              <input type="text"
-                placeholder='Wyszukuj po tagach'           
-                onChange={this.updateByTags}/>  
-          </div>
-        )
-    }
+            {this.state.tags.map((tag, i) => (
+              <li key={tag}>
+                {tag}
+                <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
+              </li>
+            ))}
+
+            <li className="input-tag__tags__input">
+              <input type="text" placeholder='Wyszukuj po tagach' onKeyDown={this.addTag} onKeyUp={this.filter} ref={c => { this.tagInput = c; }} />              
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    )
+  }
 }
 

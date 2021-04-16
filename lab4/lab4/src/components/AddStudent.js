@@ -86,7 +86,7 @@ export default class AddStudent extends Component {
                         ))}
 
                         <li className="input-tag__tags__input">
-                            <input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} />
+                            <input type="text" placeholder='Dodaj tagi' onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} />
                         </li>
 
                     </ul>
