@@ -7,19 +7,35 @@ import { NumberOfFoundUsers } from './components/NumberOfFoundUsers'
 function App() {
   const [students, setStudents] = useState([])
   const [filteredStudents, setFilteredStudents] = useState([])
+  const [favoriteStudents, setFavoriteStudents] = useState([])
+  const [usersFound, setUsersFound] = useState(0)
 
-  const addStudent = (name, description, email, tags) => {
+  const addStudent = (name, description, email, tags, isFavorite) => {
     const id = Math.floor(Math.random() * 10000) + 1
 
-    const newStudent = { id, name, description, email, tags }
+    const newStudent = { id, name, description, email, tags, isFavorite }
 
     setStudents([...students, newStudent])
     setFilteredStudents([...filteredStudents, newStudent])
+    setUsersFound(students.length + 1)
+  }
+
+  const deleteFromFavorites = (id) => {
+    const result = favoriteStudents.filter((student) => student.id !== id && student !== null)
+    setFavoriteStudents(result)
+  }
+
+  const addToFavorites = (name, description, tags, id) => {
+    const newStudent = { id, name, description, tags }
+    setFavoriteStudents([...favoriteStudents, newStudent])
+  }
+
+  const showFavorites = () => {
+    setUsersFound(favoriteStudents.length)
+    setFilteredStudents([...favoriteStudents])
   }
 
   const filter = (enteredDescription, enteredTags) => {
-    console.log(enteredDescription)
-    console.log(enteredTags)
     if (enteredTags.length > 0) {
       const result = students.filter((student) => {
         for (var ent in enteredTags) {
@@ -37,27 +53,32 @@ function App() {
         return true;
       })
       setFilteredStudents(result)
-      if (enteredDescription !== '') {        
+      setUsersFound(result.length)
+      if (enteredDescription !== '') {
         const newResult = result.filter((item) => item.description.toLowerCase().includes(enteredDescription.toLowerCase())).map(({ id, name, description, email, tags }) => ({ id, name, description, email, tags }));
         setFilteredStudents(newResult)
+        setUsersFound(newResult.length)
       }
     }
-    else if (enteredTags.length === 0 && enteredDescription !== '') {      
+    else if (enteredTags.length === 0 && enteredDescription !== '') {
       const result = students.filter((item) => item.description.toLowerCase().includes(enteredDescription.toLowerCase())).map(({ id, name, description, email, tags }) => ({ id, name, description, email, tags }));
       setFilteredStudents(result)
+      setUsersFound(result.length)
     }
-    else{
+    else {
       setFilteredStudents(students)
+      setUsersFound(students.length)
     }
-
   }
 
   return (
     <div className="App">
-      <SearchFilter filter={filter} />
+      <div className='header'>
+        <SearchFilter filter={filter} showFavorites={showFavorites} />
+        <NumberOfFoundUsers foundUsers={usersFound} />
+      </div>
       <AddStudent onAdd={addStudent} />
-      <StudentList students={filteredStudents} />
-      <NumberOfFoundUsers foundUsers={filteredStudents.length} />
+      <StudentList students={filteredStudents} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} />
     </div>
   );
 }

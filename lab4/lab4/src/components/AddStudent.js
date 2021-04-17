@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { useState } from 'react'
 
 export default class AddStudent extends Component {
     constructor(props) {
@@ -8,36 +7,65 @@ export default class AddStudent extends Component {
             name: '',
             mail: '',
             description: '',
-            tags: []
+            tags: [],
+            allTags: ['c++', 'java', 'php', 'python', 'javascript', 'docker', 'html', 'css', 'react', 'spring', 'c#', 'matlab', 'c', 'assembler'],
+            suggestions: []
         };
     }
 
     onSubmit = (e) => {
-        
-        e.preventDefault()       
+
+        e.preventDefault()
 
         if (this.name === '') {
             alert('Please add a student name')
             return
         }
 
-        this.props.onAdd(this.state.name, this.state.description, this.state.mail, this.state.tags)
+        this.props.onAdd(this.state.name, this.state.description, this.state.mail, this.state.tags, false)
 
-        this.setState({ name: '', description: '', mail: '', tags: []})
+        this.setState({ name: '', description: '', mail: '', tags: [] })
+    }
+
+    getSuggestions = (e) => {
+        const val = e.target.value;
+
+        const result = this.state.allTags.filter(tag => tag.includes(val))        
+        this.state.suggestions = [];
+        this.setState({ suggestions: result })
+
+        if (this.tagInput.value === '' || !val) {
+            this.setState({ suggestions: [] })
+        }
     }
 
     inputKeyDown = (e) => {
         const val = e.target.value;
+
         if (e.key === 'Enter' && val) {
             if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
                 return;
             }
             this.setState({ tags: [...this.state.tags, val] });
+            if (!this.state.allTags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
+                this.setState({ allTags: [...this.state.allTags, val] });
+            }
+            this.state.suggestions = [];
             this.tagInput.value = null;
         }
         else if (e.key === 'Backspace' && !val) {
             this.removeTag(this.state.tags.length - 1);
         }
+    }
+
+    addFromSugestions = (i) => {
+        const suggestions = [...this.state.suggestions];
+        if (this.state.tags.find(tag => tag.toLowerCase() === suggestions[i].toLowerCase())) {
+            return;
+        }
+        this.setState({ tags: [...this.state.tags, suggestions[i]] })
+        this.tagInput.value = null;
+        this.state.suggestions = [];
     }
 
     removeTag = (i) => {
@@ -48,27 +76,24 @@ export default class AddStudent extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}>
-                <h3>Dodaj nowego studenta</h3>
+            <form className='addStudent' onSubmit={this.onSubmit} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}>
+                <p>Dodaj nowego studenta</p>
 
-                <div>
-                    <label>Imie i nazwisko</label>
+                <div>                    
                     <input type="text"
-                        placeholder='Imie'
+                        placeholder='Imie i nazwisko'
                         value={this.state.name || ''}
                         onChange={(e) => this.setState({ name: e.target.value })} />
                 </div>
 
-                <div>
-                    <label>Opis</label>
+                <div>                    
                     <input type="text"
                         placeholder='Opis'
                         value={this.state.description || ''}
                         onChange={(e) => this.setState({ description: e.target.value })} />
                 </div>
 
-                <div>
-                    <label>Adres email</label>
+                <div>                    
                     <input type="text"
                         placeholder='Email'
                         value={this.state.mail || ''}
@@ -79,21 +104,30 @@ export default class AddStudent extends Component {
                     <ul className="input-tag__tags">
 
                         {this.state.tags.map((tag, i) => (
-                            <li key={tag}>
-                                {tag}
-                                <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
+                            <li key={tag}>                                
+                                <button type="button" onClick={() => { this.removeTag(i); }}>{tag}</button>
                             </li>
                         ))}
 
                         <li className="input-tag__tags__input">
-                            <input type="text" placeholder='Dodaj tagi' onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} />
+                            <input type="text" placeholder='Dodaj tagi' onChange={this.getSuggestions} onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} />
                         </li>
 
                     </ul>
 
                 </div>
 
-                <input type='submit' value='Save Student' />
+                <div className="input-tag">
+                    <ul className="input-tag__tags">
+                        {this.state.suggestions.map((tag, i) => (
+                            <li key={tag.uniqueId}>                                
+                                <button type="button" onClick={() => { this.addFromSugestions(i); }}>{tag}</button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <input type='submit' className='submitButton' value='Save Student' />
 
             </form>
         )
