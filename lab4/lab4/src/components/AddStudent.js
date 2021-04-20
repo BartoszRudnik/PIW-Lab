@@ -31,7 +31,6 @@ export default class AddStudent extends Component {
         const val = e.target.value;
 
         const result = this.state.allTags.filter(tag => tag.includes(val))        
-        this.state.suggestions = [];
         this.setState({ suggestions: result })
 
         if (this.tagInput.value === '' || !val) {
@@ -50,7 +49,7 @@ export default class AddStudent extends Component {
             if (!this.state.allTags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
                 this.setState({ allTags: [...this.state.allTags, val] });
             }
-            this.state.suggestions = [];
+            this.setState({suggestions: []})
             this.tagInput.value = null;
         }
         else if (e.key === 'Backspace' && !val) {
@@ -65,7 +64,7 @@ export default class AddStudent extends Component {
         }
         this.setState({ tags: [...this.state.tags, suggestions[i]] })
         this.tagInput.value = null;
-        this.state.suggestions = [];
+        this.setState({suggestions: []})
     }
 
     removeTag = (i) => {

@@ -11,17 +11,17 @@ export const StudentItem = (props) => {
     return (
         <div key={props.key} className='studentItem'>
             <div className='studentItemLeft'>
-                {props.studentTags && <img src={logo} />}
+                {props.studentTags && <img alt='' src={logo} />}
             </div>
             <div className='studentItemCenter'>
                 <h1>{props.studentName}</h1>
                 <h5>{props.studentDescription}</h5>
                 <div className='userTags'>
                     <ul>
-                        <li><a>Tagi:</a></li>
+                        <li>Tagi:</li>
                         {props.studentTags && props.studentTags.map((tag, index) => {
-                            return <li>
-                                <a key={index}> {tag} </a>
+                            return <li key={index}>
+                                {tag}
                             </li>
                         })}
                     </ul>
@@ -41,7 +41,7 @@ export const StudentItem = (props) => {
                             }
                         }}>
 
-                        {!isFavorite ? <a>Dodaj do ulubionych </a> : <a>Usun z ulubionych </a>}
+                        {!isFavorite ? <>Dodaj do ulubionych</>  : <>Usun z ulubionych</>}
                         {isFavorite ? <MdFavorite /> : <GrFavorite />}
                     </IconButton>}
                 </div>

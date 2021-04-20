@@ -70,7 +70,7 @@ export default class SearchFilter extends Component {
 
         </div>
         <div className='onlyFavorites'>
-          <a>Pokaz tylko ulubionych</a>
+          <>Pokaz tylko ulubionych</>
           <input type="checkbox" onChange={this.showFavorites} ref={d => { this.myCheck = d; }} />
         </div>
       </div>

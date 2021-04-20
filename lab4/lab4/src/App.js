@@ -2,6 +2,7 @@ import AddStudent from './components/AddStudent'
 import SearchFilter from './components/SearchFilter'
 import { StudentList } from './components/StudentList'
 import { useState } from 'react'
+import React from 'react'
 import { NumberOfFoundUsers } from './components/NumberOfFoundUsers'
 
 function App() {
@@ -72,14 +73,16 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className='header'>
-        <SearchFilter filter={filter} showFavorites={showFavorites} />
-        <NumberOfFoundUsers foundUsers={usersFound} />
+    <React.StrictMode>
+      <div className="App">
+        <div className='header'>
+          <SearchFilter filter={filter} showFavorites={showFavorites} />
+          <NumberOfFoundUsers foundUsers={usersFound} />
+        </div>
+        <AddStudent onAdd={addStudent} />
+        <StudentList students={filteredStudents} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} />
       </div>
-      <AddStudent onAdd={addStudent} />
-      <StudentList students={filteredStudents} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} />
-    </div>
+    </React.StrictMode >
   );
 }
 
