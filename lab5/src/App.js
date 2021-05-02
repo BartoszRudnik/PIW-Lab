@@ -193,7 +193,9 @@ function App() {
                 <SearchFilter filter={filter} showFavorites={showFavorites} />
                 <NumberOfFoundUsers foundUsers={usersFound} />
               </div>
-              <StudentList students={filteredStudents} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} editStudent={editStudent} />
+              <div className='outerStudentList'>
+                <StudentList students={filteredStudents} addToFavorites={addToFavorites} deleteFromFavorites={deleteFromFavorites} editStudent={editStudent} />
+              </div>
             </Route>
 
             <Route exact path="/createStudent">
@@ -209,7 +211,9 @@ function App() {
                 <SearchFilter filter={filterProjects} showFavorites={showFavoritesProjects} />
                 <NumberOfFoundUsers foundUsers={projectsFound} />
               </div>
-              <ProjectList projects={filteredProjects} addToFavorites={addProjectToFavorites} deleteFromFavorites={deleteProjectFromFavorites} editProject={editProject} />
+              <div className='outerStudentList'>
+                <ProjectList projects={filteredProjects} addToFavorites={addProjectToFavorites} deleteFromFavorites={deleteProjectFromFavorites} editProject={editProject} />
+              </div>
             </Route>
 
           </Switch>

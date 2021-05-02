@@ -25,7 +25,7 @@ export default class AddProject extends Component {
 
         this.props.onAdd(this.state.organization, this.state.name, this.state.description, this.state.mail, this.state.tags, false)
 
-        this.setState({ name: '', description: '', mail: '', tags: [] })
+        this.setState({organization: '', name: '', description: '', mail: '', tags: [] })
     }
 
     getSuggestions = (e) => {
