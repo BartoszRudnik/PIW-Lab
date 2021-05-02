@@ -1,0 +1,296 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+body {
+  background-image: linear-gradient(to right, DeepPink, DarkOrange);
+  padding: 20px;
+}
+
+.header{  
+  padding: 5px;
+  margin: 15px; 
+  width: 50%;
+  display: inline-flex; 
+}
+
+.headerBlock{
+  width: 80%;
+  background-image: linear-gradient(to right, lavender, NavajoWhite); 
+  display: inline-block; 
+  margin-right: 2%;  
+}
+
+.usersFound{  
+  padding: 5px;
+  width: 20%;
+  background-image: linear-gradient(to right, lavender, NavajoWhite);
+}
+
+.addStudent{
+  border: solid;
+  border-color: wheat;
+  background-image: linear-gradient(to right, lavender, NavajoWhite);  
+  padding: 10px;
+  margin: 30px;
+  position: absolute;
+  top: 10px;
+  right: 2%;
+  width: 300px;
+}
+
+.addStudent label{
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+}
+
+.addStudent p{
+  font-weight: bolder;
+  font-size: 25px;
+  align-self: center;
+  text-align: center;
+}
+
+.addStudent input{
+  border: none;
+  background: honeydew;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 10px; 
+  width: 90%;
+}
+
+.submitButton{
+  align-self: center;
+  text-align: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+::placeholder {
+  padding: 2px; 
+  color: black;  
+}
+
+.onlyFavorites{
+  font-weight: 400;
+  width: 50%;
+  border: solid;
+  border-color: wheat;
+  background: honeydew;
+  margin-top: 15px;
+  margin-left: 12px;
+}
+
+.input-tag2 {
+    
+  margin: 10px;  
+  background: honeydew;
+  display: flex;
+  flex-wrap: wrap;  
+}
+
+.input-tag2 input {
+  width: 100%;
+  background: honeydew;
+  border: none;  
+}
+
+.input-tag {  
+  margin-top: 10px;  
+  background: honeydew;
+  display: flex;
+  flex-wrap: wrap;  
+}
+
+.input-tag input {
+  background: honeydew;
+  border: none;  
+}
+
+.input-tag__tags {
+  width: 100%;
+  background: honeydew; 
+  margin: 0;
+  padding: 0;  
+}
+
+.input-tag__tags li, button{  
+  border: none;  
+  background-image: linear-gradient(to right, lavender, NavajoWhite);  
+  color: black;  
+  font-weight: 300;
+  list-style: none;
+  display: inline-flex;
+  flex-wrap: wrap;  
+  margin: 3px;    
+}
+
+.input-tag__tags li{
+  background: honeydew;
+}
+
+.input-tag__tags li.input-tag__tags__input {
+  background: none;
+  flex-grow: 1;
+  padding: 0;
+}
+
+.studentList{   
+  padding: 5px;
+  margin: 15px;
+  width: 50%;  
+  border: bold;
+  border-color: black;
+  background-image: linear-gradient(to right, lavender, NavajoWhite);
+}
+
+.studentItem{  
+  display: inline-flex;
+  background-image: linear-gradient(to right, lavender, NavajoWhite);      
+}
+
+.studentItemLeft{
+  width: 10%;
+}
+
+img{
+  margin: 2px;
+  width: 100%;
+  height: 100%;
+}
+
+.studentItemCenter{
+  width: 50%;    
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.studentItemCenter h5{
+  word-wrap: break-word;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.studentItemRight{
+  margin-top: 2%;     
+  float: right;
+}
+
+.studentItemRight a{  
+  margin-right: 0;  
+  text-align: center;
+  font-weight: 400;
+  color: black;  
+}
+
+.studentItemRight h2{
+  margin-bottom: 20%;
+  margin-right: 0;  
+  text-align: center;
+  font-weight: 400;
+  color: black;  
+}
+
+.iconButton{  
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.userTags {
+  float: left;
+  border: none;
+  margin: none;
+}
+
+.userTags ul{
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.userTags li{  
+  margin-right: 8px;    
+  display: inline-flex; 
+}
+
+.navbar {
+  background-image: linear-gradient(to right, lavender, NavajoWhite);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 700px;
+  margin: 0 auto; 
+}
+.navbar h1 {
+  color: #f1356d;
+}
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+.navbar a:hover {
+  color: green;
+}
+
+.box{
+  width: fit-content;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 70px;
+  text-align: center;
+  margin: auto;
+  margin-top: 5%;
+  color: white;
+  font-family: 'Century Gothic',sans-serif;
+}  
+.box h1{
+  font-size: 40px;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.box h2{
+  font-size: 30px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.box h5{
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 100;
+}
+.box p{
+  text-align: justify;
+}  
+
+.icon{
+  padding: 20px;    
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+}
+
+.icon p{
+  font-weight: bold;
+  text-align: center;
+}
