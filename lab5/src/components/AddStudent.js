@@ -126,7 +126,7 @@ export default class AddStudent extends Component {
                     </ul>
                 </div>
 
-                <input type='submit' className='submitButton' value='Save Student' />
+                <input type='submit' className='submitButton' value='Dodaj studenta' />
 
             </form>
         )

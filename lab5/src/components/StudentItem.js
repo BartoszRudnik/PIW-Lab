@@ -4,9 +4,15 @@ import { MdMessage } from 'react-icons/md';
 import { MdFavorite } from 'react-icons/md';
 import { GrFavorite } from 'react-icons/gr';
 import { IconButton } from '@material-ui/core';
+import StudentPopup from './StudentPopup';
 
 export const StudentItem = (props) => {
     const [isFavorite, setFavorite] = useState(false)
+    const [isEdited, setEdited] = useState(false)
+
+    const togglePop = () => {
+        setEdited(!isEdited)
+    };
 
     return (
         <div key={props.key} className='studentItem'>
@@ -41,9 +47,15 @@ export const StudentItem = (props) => {
                             }
                         }}>
 
-                        {!isFavorite ? <>Dodaj do ulubionych</>  : <>Usun z ulubionych</>}
+                        {!isFavorite ? <>Dodaj do ulubionych</> : <>Usun z ulubionych</>}
                         {isFavorite ? <MdFavorite /> : <GrFavorite />}
                     </IconButton>}
+                </div>
+                <div>
+                    <div className="iconButton" onClick={togglePop}>
+                        <button>Edytuj</button>
+                    </div>
+                    {isEdited ? <StudentPopup editStudent={props.editStudent} toggle={togglePop} studentId={props.studentId} studentName={props.studentName} studentDescription={props.studentDescription} studentTags={props.studentTags}/> : null}
                 </div>
             </div>
         </div>

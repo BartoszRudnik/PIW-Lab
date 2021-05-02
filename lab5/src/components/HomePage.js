@@ -1,7 +1,7 @@
 const HomePage = () => {
     return (
         <div className="box">
-            <h1>Tinder do projektów</h1>
+            <h1>Studenci i projekty</h1>
         </div>
     );
 }
