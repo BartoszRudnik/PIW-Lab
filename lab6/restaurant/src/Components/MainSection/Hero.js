@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../NavigationBar/Navbar";
 import SideBar from "../SideBar/Side";
 import {
+  HeroItems,
   HeroContainer,
   HeroContent,
   HeroBtn,
@@ -17,12 +18,12 @@ const Hero = () => {
 
   return (
     <HeroContainer>
-      <Navbar toggle={this.toggle}/>
-      <SideBar isOpen={isOpen} toggle={this.toggle}/>
+      <Navbar toggle={toggle} />
+      <SideBar isOpen={isOpen} toggle={toggle} />
       <HeroContent>
         <HeroItems>
-          <HeroH1>Title</HeroH1>
-          <HeroP>Subtitle</HeroP>
+          <HeroH1>Best Italian Pizza in town</HeroH1>
+          <HeroP>Try it now</HeroP>
           <HeroBtn>Place Order</HeroBtn>
         </HeroItems>
       </HeroContent>

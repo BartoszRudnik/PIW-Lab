@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "@reach/router";
-import { auth, generateUserDocument, signInWithGoogle } from "../firebase";
+import { auth, generateUserDocument, signInWithGoogle } from "../../firebase";
+import { SideBarLink } from "../SideBar/SideBarElements";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -59,7 +59,7 @@ const SignUp = () => {
             value={displayName}
             placeholder="E.g: Jan Kowalski"
             id="displayName"
-            onChange={event => onChangeHandler(event)}
+            onChange={(event) => onChangeHandler(event)}
           />
           <label htmlFor="userEmail" className="block">
             Email:
@@ -71,7 +71,7 @@ const SignUp = () => {
             value={email}
             placeholder="E.g: jan_kowalski@gmail.com"
             id="userEmail"
-            onChange={event => onChangeHandler(event)}
+            onChange={(event) => onChangeHandler(event)}
           />
           <label htmlFor="userPassword" className="block">
             Password:
@@ -83,11 +83,11 @@ const SignUp = () => {
             value={password}
             placeholder="Your Password"
             id="userPassword"
-            onChange={event => onChangeHandler(event)}
+            onChange={(event) => onChangeHandler(event)}
           />
           <button
             className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
-            onClick={event => {
+            onClick={(event) => {
               createUserWithEmailAndPassword(event, email, password);
             }}
           >
@@ -109,9 +109,12 @@ const SignUp = () => {
         </button>
         <p className="text-center my-3">
           Already have an account?{" "}
-          <Link to="/" className="text-blue-500 hover:text-blue-600">
+          <SideBarLink
+            to="/signIn"
+            className="text-blue-500 hover:text-blue-600"
+          >
             Sign in here
-          </Link>{" "}
+          </SideBarLink>{" "}
         </p>
       </div>
     </div>

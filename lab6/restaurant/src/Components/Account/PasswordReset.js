@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "@reach/router";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
+import { SideBarLink } from "../SideBar/SideBarElements";
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
@@ -70,12 +70,12 @@ const PasswordReset = () => {
           </button>
         </form>
 
-        <Link
-          to="/"
+        <SideBarLink
+          to="/signIn"
           className="my-2 text-blue-700 hover:text-blue-800 text-center block"
         >
           &larr; back to sign in page
-        </Link>
+        </SideBarLink>
       </div>
     </div>
   );

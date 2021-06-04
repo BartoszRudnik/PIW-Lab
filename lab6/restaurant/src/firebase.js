@@ -20,7 +20,7 @@ export const firestore = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithGoogle = () => {
-  auth.signInWithPopup(provider);
+  auth.signInWithRedirect(provider);
 };
 
 export const generateUserDocument = async (user, additionalData) => {
@@ -31,38 +31,34 @@ export const generateUserDocument = async (user, additionalData) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
 
-  if(!snapshot.exists){
-
+  if (!snapshot.exists) {
     const { email, displayName, photoURL } = user;
 
-    try{
+    try {
       await userRef.set({
         displayName,
         email,
         photoURL,
-        ...additionalData
+        ...additionalData,
       });
-    } catch(error){
+    } catch (error) {
       console.error("Error creating user document", error);
     }
-
   }
 
   return getUserDocument(user.uid);
-
 };
 
-const getUserDocument = async uid => {
+const getUserDocument = async (uid) => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();
 
     return {
       uid,
-      ...userDocument.data()
+      ...userDocument.data(),
     };
   } catch (error) {
     console.error("Error fetching user", error);
   }
 };
-

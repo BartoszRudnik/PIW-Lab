@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "@reach/router";
-import { auth, signInWithGoogle } from "../firebase";
+import { auth, signInWithGoogle } from "../../firebase";
+import { SideBarLink } from "../SideBar/SideBarElements";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -71,13 +71,13 @@ const SignIn = () => {
         </button>
         <p className="text-center my-3">
           Don't have an account?{" "}
-          <Link to="signUp" className="text-blue-500 hover:text-blue-600">
+          <SideBarLink to="/signUp" className="text-blue-500 hover:text-blue-600">
             Sign up here
-          </Link>{" "}
+          </SideBarLink>{" "}
           <br />{" "}
-          <Link to="passwordReset" className="text-blue-500 hover:text-blue-600">
+          <SideBarLink to="/resetPassword" className="text-blue-500 hover:text-blue-600">
             Forgot Password?
-          </Link>
+          </SideBarLink>
         </p>
       </div>
     </div>

@@ -1,4 +1,6 @@
 import React from "react";
+import HomePage from "../Account/HomePage";
+import UserProvider from "../../Providers/UserProvider";
 import {
   Icon,
   CloseIcon,
@@ -16,9 +18,8 @@ const SideBar = ({ isOpen, toggle }) => {
         <CloseIcon />
       </Icon>
       <SideBarMenu>
-        <SideBarLink to="/">Pizzas</SideBarLink>
-        <SideBarLink to="/">Desserts</SideBarLink>
-        <SideBarLink to="/">Full Menu</SideBarLink>
+        <HomePage />
+        Orders History
       </SideBarMenu>
       <SideBtnWrap>
         <SideBarRoute to="/">Order Now</SideBarRoute>
