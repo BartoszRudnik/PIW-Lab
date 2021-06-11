@@ -13,27 +13,33 @@ import {
   ProductImg,
 } from "./ProductsElements";
 
-const Products = ({ heading }) => {
- 
-  const data = useContext(PizzaContext);  
+const Products = ({ heading, addToCart }) => {
+  const data = useContext(PizzaContext);
 
   return (
     <ProductsContainer>
       <ProductsHeading>{heading}</ProductsHeading>
       <ProductWrapper>
-        {data != null && data.map((product, index) => {
-          return (
-            <ProductCard key={index}>
-              <ProductImg src={product.img} alt={product.alt} />
-              <ProductInfo>
-                <ProductTitle>{product.name}</ProductTitle>
-                <ProductDesc>{product.desc}</ProductDesc>
-                <ProductPrice>{product.price}</ProductPrice>
-                <ProductButton>{product.button}</ProductButton>
-              </ProductInfo>
-            </ProductCard>
-          );
-        })}
+        {data != null &&
+          data.map((product, index) => {
+            return (
+              <ProductCard key={index}>
+                <ProductImg src={product.img} alt={product.alt} />
+                <ProductInfo>
+                  <ProductTitle>{product.name}</ProductTitle>
+                  <ProductDesc>{product.desc}</ProductDesc>
+                  <ProductPrice>{product.price}</ProductPrice>
+                  <ProductButton
+                    onClick={() => {
+                      addToCart(product.name, product.calc_price);
+                    }}
+                  >
+                    {product.button}
+                  </ProductButton>
+                </ProductInfo>
+              </ProductCard>
+            );
+          })}
       </ProductWrapper>
     </ProductsContainer>
   );

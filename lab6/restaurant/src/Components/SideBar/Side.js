@@ -1,17 +1,49 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { OrderContext } from "../../Providers/OrderProvider";
+
+import { UserContext } from "../../Providers/UserProvider";
+
 import HomePage from "../Account/HomePage";
-import UserProvider from "../../Providers/UserProvider";
+
 import {
   Icon,
   CloseIcon,
   SideBarContainer,
-  SideBarLink,
   SideBarMenu,
   SideBarRoute,
   SideBtnWrap,
 } from "./SideBarElements";
 
-const SideBar = ({ isOpen, toggle }) => {
+const SideBar = ({ isOpen, toggle, actualOrder, clearCart }) => {
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
+  const orders = useContext(OrderContext);
+  const user = useContext(UserContext);
+
+  const addOrder = (order) => {
+    setFilteredOrders((filteredOrders) => [...filteredOrders, order]);
+  };
+
+  const filterOrders = (user, orders) => {
+    setFilteredOrders([]);
+
+    if (user != null) {
+      const { photoURL, displayName, email } = user;
+
+      const userEmail = email;
+
+      if (userEmail != null) {
+        orders.forEach((order) => {
+          const { email, orderList } = order;
+          if (email === userEmail) {
+            addOrder(orderList);
+            console.log(filteredOrders);
+          }
+        });
+      }
+    }
+  };
+
   return (
     <SideBarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
@@ -19,10 +51,30 @@ const SideBar = ({ isOpen, toggle }) => {
       </Icon>
       <SideBarMenu>
         <HomePage />
-        Orders History
       </SideBarMenu>
+      <SideBtnWrap
+        onClick={() => {
+          filterOrders(user, orders);
+        }}
+      >
+        <SideBarRoute
+          to={{
+            pathname: "/ordersHistory",
+            state: { orderList: filteredOrders },
+          }}
+        >
+          Orders History
+        </SideBarRoute>
+      </SideBtnWrap>
       <SideBtnWrap>
-        <SideBarRoute to="/">Order Now</SideBarRoute>
+        <SideBarRoute
+          to={{
+            pathname: "/orderNow",
+            state: { actualOrder: actualOrder},
+          }}
+        >
+          Order Now
+        </SideBarRoute>
       </SideBtnWrap>
     </SideBarContainer>
   );

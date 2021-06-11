@@ -8,12 +8,27 @@ export const ProductsContainer = styled.div`
   color: #fff;
 `;
 
+export const ProductsContainer2 = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  padding: 5rem calc((100vw - 1300px) / 2);
+  background: #150f0f;
+  color: black;
+`;
+
 export const ProductWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
 `;
+
+export const ProductCard2 = styled.div`
+background: #FFD700;
+margin: 1rem 2rem;
+line-height: 2;
+width: 300px;
+;`
 
 export const ProductCard = styled.div`
   margin: 0 2rem;
@@ -48,8 +63,22 @@ export const ProductInfo = styled.div`
   text-align: center;
 `;
 
+export const ProductInfo2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  text-align: center;
+`;
+
 export const ProductDesc = styled.p`
   margin-bottom: 1rem;
+`;
+
+export const ProductPrice2 = styled.p`
+  margin-bottom: 1rem;
+  font-size: 1rem;
 `;
 
 export const ProductPrice = styled.p`
