@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ProductInfo2,
-  ProductInfo,
   ProductCard2,
   ProductTitle,
   ProductDesc,

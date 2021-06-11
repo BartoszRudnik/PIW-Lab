@@ -9,11 +9,27 @@ export const ProductsContainer = styled.div`
 `;
 
 export const ProductsContainer2 = styled.div`
+  vertical-align: middle;
+  justify: center;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   min-height: 100vh;
   padding: 5rem calc((100vw - 1300px) / 2);
   background: #150f0f;
   color: black;
+`;
+
+export const ProductsContainer3 = styled.div`
+  vertical-align: middle;
+  justify: center;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 5rem calc((100vw - 1300px) / 2);
+  background: #150f0f;
+  color: white;
 `;
 
 export const ProductWrapper = styled.div`
@@ -24,11 +40,14 @@ export const ProductWrapper = styled.div`
 `;
 
 export const ProductCard2 = styled.div`
-background: #FFD700;
-margin: 1rem 2rem;
-line-height: 2;
-width: 300px;
-;`
+  justify: center;
+  justify-content: center;
+  align-items: center;
+  background: #ffd100;
+  margin: 1rem 2rem;
+  line-height: 2;
+  width: 300px; ;
+`;
 
 export const ProductCard = styled.div`
   margin: 0 2rem;
@@ -49,9 +68,21 @@ export const ProductsHeading = styled.h1`
   margin-bottom: 5rem;
 `;
 
+export const ProductsHeading2 = styled.h1`
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  text-align: center;
+  margin-bottom: 5rem;
+  color: white;
+`;
+
 export const ProductTitle = styled.h2`
   font-weight: 400;
   font-size: 1.5rem;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const ProductInfo = styled.div`
@@ -77,6 +108,9 @@ export const ProductDesc = styled.p`
 `;
 
 export const ProductPrice2 = styled.p`
+  justify: center;
+  justify-content: center;
+  text-align: center;
   margin-bottom: 1rem;
   font-size: 1rem;
 `;

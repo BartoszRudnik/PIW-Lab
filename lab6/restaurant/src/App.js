@@ -20,7 +20,7 @@ function App() {
     return orderedPizzas.some((pizza) => pizza.name === name);
   };
 
-  const clearOrder = () => {
+  const clearCart = () => {
     setOrder([]);
   };
 
@@ -61,7 +61,7 @@ function App() {
             <Route exact path="/signIn" component={SignIn} />
             <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/resetPassword" component={PasswordReset} />
-            <Route exact path="/orderNow" render={(props) => <OrderNow {...props} clearCart={clearOrder}/>} />
+            <Route exact path="/orderNow" render={(props) => <OrderNow {...props} clearCart={clearCart}/>} />
             <Route exact path="/ordersHistory" component={OrdersList} />
             <Route exact path="/orderItem" component={OrderItem} />
           </Switch>

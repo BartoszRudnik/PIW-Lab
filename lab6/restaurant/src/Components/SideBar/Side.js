@@ -1,15 +1,12 @@
 import React, { useContext, useState } from "react";
 import { OrderContext } from "../../Providers/OrderProvider";
-
 import { UserContext } from "../../Providers/UserProvider";
-
 import HomePage from "../Account/HomePage";
 
 import {
   Icon,
   CloseIcon,
   SideBarContainer,
-  SideBarMenu,
   SideBarRoute,
   SideBtnWrap,
 } from "./SideBarElements";
@@ -49,33 +46,36 @@ const SideBar = ({ isOpen, toggle, actualOrder, clearCart }) => {
       <Icon onClick={toggle}>
         <CloseIcon />
       </Icon>
-      <SideBarMenu>
-        <HomePage />
-      </SideBarMenu>
-      <SideBtnWrap
-        onClick={() => {
-          filterOrders(user, orders);
-        }}
-      >
-        <SideBarRoute
-          to={{
-            pathname: "/ordersHistory",
-            state: { orderList: filteredOrders },
+      <HomePage />
+
+      {user && (
+        <SideBtnWrap
+          onClick={() => {
+            filterOrders(user, orders);
           }}
         >
-          Orders History
-        </SideBarRoute>
-      </SideBtnWrap>
-      <SideBtnWrap>
-        <SideBarRoute
-          to={{
-            pathname: "/orderNow",
-            state: { actualOrder: actualOrder},
-          }}
-        >
-          Order Now
-        </SideBarRoute>
-      </SideBtnWrap>
+          <SideBarRoute
+            to={{
+              pathname: "/ordersHistory",
+              state: { orderList: filteredOrders },
+            }}
+          >
+            Orders History
+          </SideBarRoute>
+        </SideBtnWrap>
+      )}
+      {user && (
+        <SideBtnWrap>
+          <SideBarRoute
+            to={{
+              pathname: "/orderNow",
+              state: { actualOrder: actualOrder },
+            }}
+          >
+            Order Now
+          </SideBarRoute>
+        </SideBtnWrap>
+      )}
     </SideBarContainer>
   );
 };
