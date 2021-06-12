@@ -6,7 +6,7 @@ import {
   ProductsContainer2,
   ProductsHeading2,
   ProductCard2,
-  ProductPrice2,
+  ProductPrice3,
   ProductWrapper,
 } from "../ProductList/ProductsElements";
 import { SideBarRoute, SideBtnWrap } from "../SideBar/SideBarElements";
@@ -16,7 +16,21 @@ const OrderNow = (props) => {
   const { photoURL, displayName, email } = user;
 
   const saveOrder = (orderList) => {
-    firestore.collection("orders").add({ orderList, email });
+    const today = new Date();
+    const date =
+      today.getDate() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getFullYear() +
+      " " +
+      today.getHours() +
+      ":" +
+      today.getMinutes();
+
+    if (orderList.length > 0) {
+      firestore.collection("orders").add({ orderList, email, date });
+    }
   };
 
   const clear = () => {
@@ -33,7 +47,7 @@ const OrderNow = (props) => {
     return totalPrice;
   };
 
-  return props.location.state.actualOrder ? (
+  return (
     <ProductsContainer2>
       <ProductsHeading2>Your cart:</ProductsHeading2>
       <ProductWrapper>
@@ -41,9 +55,9 @@ const OrderNow = (props) => {
       </ProductWrapper>
       <ProductWrapper>
         <ProductCard2>
-          <ProductPrice2>
-            Cena całkowita: {calculateTotalPrice()} $
-          </ProductPrice2>
+          <ProductPrice3>
+            Total price: {calculateTotalPrice().toFixed(2)} $
+          </ProductPrice3>
         </ProductCard2>
       </ProductWrapper>
       <ProductWrapper>
@@ -61,6 +75,21 @@ const OrderNow = (props) => {
             Place Order
           </SideBarRoute>
         </SideBtnWrap>
+
+        <SideBtnWrap
+          onClick={() => {
+            clear();
+          }}
+        >
+          <SideBarRoute
+            to={{
+              pathname: "/",
+            }}
+          >
+            Clear cart
+          </SideBarRoute>
+        </SideBtnWrap>
+
         <SideBtnWrap>
           <SideBarRoute
             to={{
@@ -72,8 +101,6 @@ const OrderNow = (props) => {
         </SideBtnWrap>
       </ProductWrapper>
     </ProductsContainer2>
-  ) : (
-    <h1>Your cart is empty</h1>
   );
 };
 

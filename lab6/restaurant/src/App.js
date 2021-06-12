@@ -46,32 +46,35 @@ function App() {
 
   const addPizza = (name, price) => {
     const quantity = 1;
+
     const newPizza = { name, price, quantity };
 
     setOrder([...orderedPizzas, newPizza]);
   };
 
   return (
-    <OrderProvider>
-      <UserProvider>
-        <Router>
-          <Switch>
-            <Route exact path="/hero" component={Hero} />
-            <Route exact path="/homePage" component={HomePage} />
-            <Route exact path="/signIn" component={SignIn} />
-            <Route exact path="/signUp" component={SignUp} />
-            <Route exact path="/resetPassword" component={PasswordReset} />
-            <Route exact path="/orderNow" render={(props) => <OrderNow {...props} clearCart={clearCart}/>} />
-            <Route exact path="/ordersHistory" component={OrdersList} />
-            <Route exact path="/orderItem" component={OrderItem} />
-          </Switch>
-          <Hero actualOrder={orderedPizzas}/>
-          <PizzaProvider>
-            <Products heading="Choose your favorite" addToCart={cartManager} />
-          </PizzaProvider>
-        </Router>
-      </UserProvider>
-    </OrderProvider>
+    <UserProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/hero" component={Hero} />
+          <Route exact path="/homePage" component={HomePage} />
+          <Route exact path="/signIn" component={SignIn} />
+          <Route exact path="/signUp" component={SignUp} />
+          <Route exact path="/resetPassword" component={PasswordReset} />
+          <Route
+            exact
+            path="/orderNow"
+            render={(props) => <OrderNow {...props} clearCart={clearCart} />}
+          />
+          <Route exact path="/ordersHistory" component={OrdersList} />
+          <Route exact path="/orderItem" component={OrderItem} />
+        </Switch>
+        <Hero actualOrder={orderedPizzas} />
+        <PizzaProvider>
+          <Products heading="Choose your favorite" addToCart={cartManager} />
+        </PizzaProvider>
+      </Router>
+    </UserProvider>
   );
 }
 

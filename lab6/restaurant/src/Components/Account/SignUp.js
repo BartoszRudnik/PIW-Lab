@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { auth, generateUserDocument, signInWithGoogle } from "../../firebase";
 import { SideBarRoute, SideBtnWrap } from "../SideBar/SideBarElements";
-import { ProductsContainer3 } from "../ProductList/ProductsElements";
+import {
+  ProductsContainer3,
+  FormContainer,
+  TextWrapper,
+} from "../ProductList/ProductsElements";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +30,7 @@ const SignUp = () => {
     setEmail("");
     setPassword("");
     setDisplayName("");
+    setError("Account set up successfully");
   };
 
   const onChangeHandler = (event) => {
@@ -50,52 +55,54 @@ const SignUp = () => {
               {error}
             </div>
           )}
-          <form className="">
-            <label htmlFor="displayName" className="block">
-              Display Name:
-            </label>
-            <input
-              type="text"
-              className="my-1 p-1 w-full "
-              name="displayName"
-              value={displayName}
-              placeholder="E.g: Jan Kowalski"
-              id="displayName"
-              onChange={(event) => onChangeHandler(event)}
-            />
-            <label htmlFor="userEmail" className="block">
-              Email:
-            </label>
-            <input
-              type="email"
-              className="my-1 p-1 w-full"
-              name="userEmail"
-              value={email}
-              placeholder="E.g: jan_kowalski@gmail.com"
-              id="userEmail"
-              onChange={(event) => onChangeHandler(event)}
-            />
-            <label htmlFor="userPassword" className="block">
-              Password:
-            </label>
-            <input
-              type="password"
-              className="mt-1 mb-3 p-1 w-full"
-              name="userPassword"
-              value={password}
-              placeholder="Your Password"
-              id="userPassword"
-              onChange={(event) => onChangeHandler(event)}
-            />
-            <button
-              className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
-              onClick={(event) => {
-                createUserWithEmailAndPassword(event, email, password);
-              }}
-            >
-              Sign up
-            </button>
-          </form>
+          <FormContainer>
+            <form className="">
+              <label htmlFor="displayName" className="block">
+                <TextWrapper>Display Name:</TextWrapper>
+              </label>
+              <input
+                type="text"
+                className="my-1 p-1 w-full "
+                name="displayName"
+                value={displayName}
+                placeholder="E.g: Jan Kowalski"
+                id="displayName"
+                onChange={(event) => onChangeHandler(event)}
+              />
+              <label htmlFor="userEmail" className="block">
+                <TextWrapper>Email:</TextWrapper>
+              </label>
+              <input
+                type="email"
+                className="my-1 p-1 w-full"
+                name="userEmail"
+                value={email}
+                placeholder="E.g: jan_kowalski@gmail.com"
+                id="userEmail"
+                onChange={(event) => onChangeHandler(event)}
+              />
+              <label htmlFor="userPassword" className="block">
+                <TextWrapper>Password:</TextWrapper>
+              </label>
+              <input
+                type="password"
+                className="mt-1 mb-3 p-1 w-full"
+                name="userPassword"
+                value={password}
+                placeholder="Your Password"
+                id="userPassword"
+                onChange={(event) => onChangeHandler(event)}
+              />
+              <button
+                className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
+                onClick={(event) => {
+                  createUserWithEmailAndPassword(event, email, password);
+                }}
+              >
+                Sign up
+              </button>
+            </form>
+          </FormContainer>
           <p className="text-center my-3">or</p>
           <button
             onClick={() => {

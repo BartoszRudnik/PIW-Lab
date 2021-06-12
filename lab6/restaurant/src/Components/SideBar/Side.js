@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { OrderContext } from "../../Providers/OrderProvider";
 import { UserContext } from "../../Providers/UserProvider";
 import HomePage from "../Account/HomePage";
@@ -17,8 +17,10 @@ const SideBar = ({ isOpen, toggle, actualOrder, clearCart }) => {
   const orders = useContext(OrderContext);
   const user = useContext(UserContext);
 
-  const addOrder = (order) => {
-    setFilteredOrders((filteredOrders) => [...filteredOrders, order]);
+  const addOrder = (order, date) => {
+    const newOrder = { order, date };
+
+    setFilteredOrders((filteredOrders) => [...filteredOrders, newOrder]);
   };
 
   const filterOrders = (user, orders) => {
@@ -31,15 +33,18 @@ const SideBar = ({ isOpen, toggle, actualOrder, clearCart }) => {
 
       if (userEmail != null) {
         orders.forEach((order) => {
-          const { email, orderList } = order;
+          const { email, orderList, date } = order;
           if (email === userEmail) {
-            addOrder(orderList);
-            console.log(filteredOrders);
+            addOrder(orderList, date);
           }
         });
       }
     }
   };
+
+  useEffect(() => {
+    filterOrders(user, orders);
+  }, [user, orders]);
 
   return (
     <SideBarContainer isOpen={isOpen} onClick={toggle}>
@@ -49,11 +54,7 @@ const SideBar = ({ isOpen, toggle, actualOrder, clearCart }) => {
       <HomePage />
 
       {user && (
-        <SideBtnWrap
-          onClick={() => {
-            filterOrders(user, orders);
-          }}
-        >
+        <SideBtnWrap>
           <SideBarRoute
             to={{
               pathname: "/ordersHistory",

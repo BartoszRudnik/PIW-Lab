@@ -13,8 +13,8 @@ const ProductList = ({ actualOrder }) => {
       <ProductCard2>
         <ProductInfo2>
           <ProductTitle>{product.name}</ProductTitle>
-          <ProductDesc>sztuki: {product.quantity}</ProductDesc>
-          <ProductPrice2>Cena za sztukę: {product.price} $</ProductPrice2>
+          <ProductDesc>Number of units: {product.quantity}</ProductDesc>
+          <ProductPrice2>Unit price: {product.price} $</ProductPrice2>
         </ProductInfo2>
       </ProductCard2>
     </div>

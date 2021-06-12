@@ -28,8 +28,16 @@ export const ProductsContainer3 = styled.div`
   width: 100vw;
   min-height: 100vh;
   padding: 5rem calc((100vw - 1300px) / 2);
-  background: #150f0f;
+  background: black;
   color: white;
+`;
+
+export const TextWrapper = styled.div`
+  color: white;
+`;
+
+export const TextWrapper2 = styled.div`
+  color: black;
 `;
 
 export const ProductWrapper = styled.div`
@@ -59,7 +67,7 @@ export const ProductImg = styled.img`
   height: 300px;
   min-width: 300px;
   max-width: 100%;
-  box-shadow: 8px 8px #fdc500;
+  box-shadow: 8px 8px #e31837;
 `;
 
 export const ProductsHeading = styled.h1`
@@ -105,6 +113,19 @@ export const ProductInfo2 = styled.div`
 
 export const ProductDesc = styled.p`
   margin-bottom: 1rem;
+`;
+
+export const FormContainer = styled.div`
+  color: black;
+`;
+
+export const ProductPrice3 = styled.p`
+  justify: left;
+  justify-content: left;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
 `;
 
 export const ProductPrice2 = styled.p`

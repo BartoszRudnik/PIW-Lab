@@ -9,6 +9,27 @@ class OrderProvider extends Component {
   };
 
   componentDidMount = async () => {
+    
+    firestore
+      .collection("orders")
+      .get()
+      .then((snapshot) => {
+        if (!snapshot.empty) {
+          const order = [];
+
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            order.push(data);
+          });
+
+          this.setState({ order });
+        }
+      })
+      .catch((error) => console.error("Error fetching orders", error));
+  };
+
+  componentDidUpdate = async () => {
+    
     firestore
       .collection("orders")
       .get()

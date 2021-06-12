@@ -39,7 +39,7 @@ export const NavIcon = styled.div`
   }
 `;
 
-export const Bars = styled(FaPizzaSlice)`
+export const Bars = styled.div`
   font-size: 2rem;
   transform: translate(-50%, -15%);
 `;

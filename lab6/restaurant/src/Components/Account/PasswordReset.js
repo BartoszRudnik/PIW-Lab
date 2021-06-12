@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { SideBarRoute, SideBtnWrap } from "../SideBar/SideBarElements";
 import { ProductsContainer3 } from "../ProductList/ProductsElements";
+import { TextWrapper2 } from "../ProductList/ProductsElements";
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
@@ -53,15 +54,17 @@ const PasswordReset = () => {
             <label htmlFor="userEmail" className="w-full block">
               Email:
             </label>
-            <input
-              type="email"
-              name="userEmail"
-              id="userEmail"
-              value={email}
-              placeholder="Input your email"
-              onChange={onChangeHandler}
-              className="mb-3 w-full px-1 py-2"
-            />
+            <TextWrapper2>
+              <input
+                type="email"
+                name="userEmail"
+                id="userEmail"
+                value={email}
+                placeholder="Input your email"
+                onChange={onChangeHandler}
+                className="mb-3 w-full px-1 py-2"
+              />
+            </TextWrapper2>
             <button
               className="w-full bg-blue-400 text-white py-3"
               onClick={(event) => {

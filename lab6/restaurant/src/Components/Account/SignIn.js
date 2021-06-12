@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { auth, signInWithGoogle } from "../../firebase";
 import { SideBarRoute, SideBtnWrap } from "../SideBar/SideBarElements";
-import { ProductsContainer3 } from "../ProductList/ProductsElements";
+import {
+  ProductsContainer3,
+  FormContainer,
+  TextWrapper,
+} from "../ProductList/ProductsElements";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +19,10 @@ const SignIn = () => {
       setError("Error signing in with password and email!");
       console.error("Error signing in with password and email", error);
     });
+
+    setEmail("");
+    setPassword("");
+    setError("Logged in successfully");
   };
 
   const onChangeHandler = (event) => {
@@ -37,40 +45,42 @@ const SignIn = () => {
               {error}
             </div>
           )}
-          <form className="">
-            <label htmlFor="userEmail" className="block">
-              Email:
-            </label>
-            <input
-              type="email"
-              className="my-1 p-1 w-full"
-              name="userEmail"
-              value={email}
-              placeholder="E.g: jan_kowalski@gmail.com"
-              id="userEmail"
-              onChange={(event) => onChangeHandler(event)}
-            />
-            <label htmlFor="userPassword" className="block">
-              Password:
-            </label>
-            <input
-              type="password"
-              className="mt-1 mb-3 p-1 w-full"
-              name="userPassword"
-              value={password}
-              placeholder="Your Password"
-              id="userPassword"
-              onChange={(event) => onChangeHandler(event)}
-            />
-            <button
-              className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
-              onClick={(event) => {
-                signInWithEmailAndPassword(event, email, password);
-              }}
-            >
-              Sign in
-            </button>
-          </form>
+          <FormContainer>
+            <form className="">
+              <label htmlFor="userEmail" className="block">
+                <TextWrapper>Email:</TextWrapper>
+              </label>
+              <input
+                type="email"
+                className="my-1 p-1 w-full"
+                name="userEmail"
+                value={email}
+                placeholder="E.g: jan_kowalski@gmail.com"
+                id="userEmail"
+                onChange={(event) => onChangeHandler(event)}
+              />
+              <label htmlFor="userPassword" className="block">
+                <TextWrapper>Password:</TextWrapper>
+              </label>
+              <input
+                type="password"
+                className="mt-1 mb-3 p-1 w-full"
+                name="userPassword"
+                value={password}
+                placeholder="Your Password"
+                id="userPassword"
+                onChange={(event) => onChangeHandler(event)}
+              />
+              <button
+                className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
+                onClick={(event) => {
+                  signInWithEmailAndPassword(event, email, password);
+                }}
+              >
+                Sign in
+              </button>
+            </form>
+          </FormContainer>
           <p className="text-center my-3">or</p>
           <button
             className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
@@ -99,13 +109,13 @@ const SignIn = () => {
               </SideBarRoute>
             </SideBtnWrap>
             <SideBtnWrap>
-            <SideBarRoute
-              to="/"
-              className="my-2 text-blue-700 hover:text-blue-800 text-center block"
-            >
-              &larr; back to main page
-            </SideBarRoute>
-          </SideBtnWrap>
+              <SideBarRoute
+                to="/"
+                className="my-2 text-blue-700 hover:text-blue-800 text-center block"
+              >
+                &larr; back to main page
+              </SideBarRoute>
+            </SideBtnWrap>
           </p>
         </div>
       </div>
